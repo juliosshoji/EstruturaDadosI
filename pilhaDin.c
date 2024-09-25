@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "pilhaDin.h"
 
 int Inicializar_pilha(node** pilha){

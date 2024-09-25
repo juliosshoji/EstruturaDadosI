@@ -2,29 +2,6 @@
 #include <stdlib.h>
 #include "pilhaDin.h"
 
-int main(int argc, char* argv[]){
-
-    node* P;
-    int info;
-    Inicializar_pilha(&P);
-    
-    Inserir_topo(&P, 10);
-    Inserir_topo(&P, 1);
-    Inserir_topo(&P, 0);
-    Inserir_topo(&P, 70);
-    Inserir_topo(&P, 6);
-    Inserir_topo(&P, 20);
-    Inserir_topo(&P, 7);
-    
-    printf("%d\n", Verifica_vazio(&P));
-    Obter_topo(&P, &info);
-    printf("%d\n", info);
-    Obter_maior(&P, &info);
-    printf("%d\n", info);
-    
-    return 0;
-};
-
 int Inicializar_pilha(node** pilha){
     *pilha = NULL;
     return 0;

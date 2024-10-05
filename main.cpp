@@ -1,12 +1,10 @@
 #include "Controller.hpp"
 
-int main(int argc, char* argv[]){
-    Controller* Cntrl = new Controller();
-        delete(Cntrl);
-    /*try{
-        
-    } catch (exception e){
-        cout << e.what() << endl;
-    }*/
+int main(){
+    try {
+        unique_ptr<Controller> controlObj = make_unique<Controller>();
+    } catch (exception* e){
+        cout << e->what() << endl;
+    }
     return 0;
 }

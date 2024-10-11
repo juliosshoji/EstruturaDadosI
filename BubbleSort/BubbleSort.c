@@ -37,6 +37,8 @@ int main(int argc, char* argv[]){
         printf("\n4) Remove Number");
         printf("\n5) Print list");
         printf("\n6) Sort list");
+        printf("\n7) Biggest Index");
+        printf("\n8) Alocation size");
         printf("\n\n");
         scanf("%d", &option);
         
@@ -58,6 +60,16 @@ int main(int argc, char* argv[]){
                 break;
             case 6:
                 error = sort(list);
+                break;
+            case 7:
+                if(list->lastNumIndex == -1){
+                    printf("\nNo index was created\n");
+                } else {
+                    printf("\nBiggest Index: %d\n", list->lastNumIndex);
+                }
+                break;
+            case 8:
+                printf("\nAlocation Size: %d\n", list->size);
                 break;
             default:
                 printf("Invalid input try! Try again!\n");

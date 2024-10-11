@@ -39,7 +39,7 @@ void Draw::drawMenu(){
 };
         
 int Draw::getOption(){
-    int option;
+   long unsigned int option;
     cout << endl << "Choose an option: ";
     cin >> option;
     if((option >= 0)&&(option <= this->options.size())){

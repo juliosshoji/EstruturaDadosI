@@ -32,6 +32,7 @@ class Controller {
         void mergeStack();
         void printStack();
         void generateRandomToStack();
+        void sortStack();
 };
 
 #endif

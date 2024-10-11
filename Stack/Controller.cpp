@@ -23,8 +23,8 @@ node** Controller::findStack(string name){
 }
 
 void Controller::start(){
-    vector<string> options {"Inicializar Pilha", "Reinicializar Pilha", "Inserir Topo", "Remover Topo", "Obter Topo", "Verifica vazio", "Obter maior dado da pilha", "Juntar Pilhas", "Mostrar pilha", "Gerar info aleatórias"};
-    vector<void (Controller::*)()> actions { &Controller::inicializeStack, &Controller::reinicializeStack, &Controller::insert, &Controller::remove, &Controller::getTopInfo, &Controller::isStackEmpty, &Controller::getStackBiggest, &Controller::mergeStack, &Controller::printStack, &Controller::generateRandomToStack};
+    vector<string> options {"Inicializar Pilha", "Reinicializar Pilha", "Inserir Topo", "Remover Topo", "Obter Topo", "Verifica vazio", "Obter maior dado da pilha", "Juntar Pilhas", "Mostrar pilha", "Gerar info aleatórias", "Ordenar pilha"};
+    vector<void (Controller::*)()> actions { &Controller::inicializeStack, &Controller::reinicializeStack, &Controller::insert, &Controller::remove, &Controller::getTopInfo, &Controller::isStackEmpty, &Controller::getStackBiggest, &Controller::mergeStack, &Controller::printStack, &Controller::generateRandomToStack, &Controller::sortStack};
     while(this->doAction("Pilha", options, actions));
 };
 
@@ -204,5 +204,20 @@ void Controller::getTopInfo(){
     else {
         getTop(stack, &info);
         cout << info << endl;
+    }
+}
+
+void Controller::sortStack(){
+    string name;
+    cout << "What stack do you want to order? (stack name)" << endl;
+    cin >> name;
+    node** stack = this->findStack(name);
+    if(stack == NULL){
+        cout << "Stack Inexistente!\n" << endl;
+    }
+    else {
+        bubbleSort(stack);
+        cout << "Done sorting" << endl;
+        this->printStack();
     }
 }

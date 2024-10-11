@@ -20,3 +20,8 @@ int generateRandom(node** stack, int size);
 int getInfo(node** stack, int* info, int index);
 
 int freeStack(node** stack);
+
+
+int bubbleSort(node** stack);
+long int getStackSize(node** stack);
+void swap(node* previous, node* now);

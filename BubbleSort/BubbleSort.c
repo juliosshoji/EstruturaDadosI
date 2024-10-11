@@ -102,7 +102,7 @@ int push_back(vector* list, int* number){
     }
 
     if(list->size == list->lastNumIndex){
-        list->vector = (int*)reallocarray(list->vector, list->size*2, sizeof(int));
+        list->vector = (int*)reallocarray(list->vector, (list->size)*2, sizeof(int));
         if(list->vector == NULL){
             printf("Error realocating memory\n");
             return 2;
@@ -194,7 +194,7 @@ int sort(vector* list){
 int printVector(vector* list){
     printf("\n");
     for(int index = 0; index < list->lastNumIndex+1; index++){
-        printf("%d ", list->vector[index]);
+        printf("[%d] ", list->vector[index]);
     }
     printf("\n");
     return 0;

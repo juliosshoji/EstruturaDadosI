@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define INCREMENT 8
 #define M -100000
@@ -11,7 +12,7 @@ typedef struct {
     int lastNumIndex;
 } vector;
 
-int push_back(vector* list, int* number);
+int push_back(vector* list, int number, int location);
 int pop(vector* list);
 int generateRandom(vector* list);
 int sort(vector* list);
@@ -20,6 +21,9 @@ int exitSafe(vector* list);
 int printVector(vector* list);
 
 int main(int argc, char* arv[]){
+
+    srand(time(NULL));
+
     vector* list = createVector();
 
     int option;
@@ -44,7 +48,7 @@ int main(int argc, char* arv[]){
                 error = generateRandom(list);
                 break;
             case 3:
-                error = push_back(list, (int*)NULL);
+                error = push_back(list, 0, 1);
                 break;
             case 4:
                 error = pop(list);
@@ -87,11 +91,11 @@ vector* createVector(){
     return list;
 }
 
-int push_back(vector* list, int* number){
-    
-    if(number == NULL){
+int push_back(vector* list, int number, int location){
+    int info = number;
+    if(location == 1){
         printf("\nWhat number to insert?\n");
-        scanf("%d", (int*)number);
+        scanf("%d", &info);
     }
 
     if(list->size == list->lastNumIndex){
@@ -103,7 +107,7 @@ int push_back(vector* list, int* number){
 
         list->size *= 2;
     }
-    list->vector[list->lastNumIndex+1] = *((int*)number);
+    list->vector[list->lastNumIndex+1] = info;
     list->lastNumIndex++;
 
     return 0;
@@ -118,7 +122,7 @@ int generateRandom(vector* list){
     while(qtd != 0){
         
         newNumber = M + rand() / (RAND_MAX / (N - M + 1) + 1);
-        push_back(list, &newNumber);
+        push_back(list, newNumber, 0);
         
         qtd--;
     }

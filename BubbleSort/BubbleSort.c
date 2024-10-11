@@ -20,7 +20,7 @@ vector* createVector();
 int exitSafe(vector* list);
 int printVector(vector* list);
 
-int main(int argc, char* arv[]){
+int main(int argc, char* argv[]){
 
     srand(time(NULL));
 

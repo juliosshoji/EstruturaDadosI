@@ -12,7 +12,7 @@ typedef struct {
     int lastNumIndex;
 } vector;
 
-int push_back(vector* list, int number, int location);
+int push_back(vector* list, int* number);
 int pop(vector* list);
 int generateRandom(vector* list);
 int sort(vector* list);
@@ -48,7 +48,7 @@ int main(int argc, char* argv[]){
                 error = generateRandom(list);
                 break;
             case 3:
-                error = push_back(list, 0, 1);
+                error = push_back(list, NULL);
                 break;
             case 4:
                 error = pop(list);
@@ -91,11 +91,14 @@ vector* createVector(){
     return list;
 }
 
-int push_back(vector* list, int number, int location){
-    int info = number;
-    if(location == 1){
+int push_back(vector* list, int* number){
+    int info;
+    if(number == NULL){
         printf("\nWhat number to insert?\n");
         scanf("%d", &info);
+    }
+    else {
+        info = *number;
     }
 
     if(list->size == list->lastNumIndex){
@@ -122,7 +125,7 @@ int generateRandom(vector* list){
     while(qtd != 0){
         
         newNumber = M + rand() / (RAND_MAX / (N - M + 1) + 1);
-        push_back(list, newNumber, 0);
+        push_back(list, &newNumber);
         
         qtd--;
     }

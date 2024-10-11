@@ -31,6 +31,7 @@ int main(int argc, char* arv[]){
         printf("\n4) Remove Number");
         printf("\n5) Print list");
         printf("\n\n");
+        printf("");
         scanf("%d", &option);
         
         switch(option){

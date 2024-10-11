@@ -194,7 +194,7 @@ int sort(vector* list){
 int printVector(vector* list){
     printf("\n");
     for(int index = 0; index < list->lastNumIndex+1; index++){
-        printf("%d ", list->vector[index]);
+        printf("[%d] ", list->vector[index]);
     }
     printf("\n");
     return 0;

@@ -124,7 +124,7 @@ int push_back(vector* list, int* number){
         info = *number;
     }
 
-    if(list->size == list->lastNumIndex){
+    if(list->size == list->lastNumIndex+1){
         list->vector = (int*)reallocarray(list->vector, (list->size)*2, sizeof(int));
         if(list->vector == NULL){
             printf("Error realocating memory\n");

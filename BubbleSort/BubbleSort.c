@@ -19,6 +19,7 @@ int sort(vector* list);
 vector* createVector();
 int exitSafe(vector* list);
 int printVector(vector* list);
+int clean(vector* list);
 
 int main(int argc, char* argv[]){
 
@@ -39,11 +40,14 @@ int main(int argc, char* argv[]){
         printf("\n6) Sort list");
         printf("\n7) Biggest Index");
         printf("\n8) Alocation size");
+        printf("\n9) Clean");
         printf("\n\n");
         scanf("%d", &option);
         
         switch(option){
             case 1:
+                free(list->vector);
+                free(list);
                 exit(0);
                 return 0;
             case 2:
@@ -71,16 +75,23 @@ int main(int argc, char* argv[]){
             case 8:
                 printf("\nAlocation Size: %d\n", list->size);
                 break;
+            case 9:
+                error = clean(list);
+                break;
             default:
                 printf("Invalid input try! Try again!\n");
         }
 
         if(error != 0){
             printf("Exiting on error state: %d\n", error);
+            free(list->vector);
+            free(list);
             exit(1);
         }
     }
-    return 0;
+    free(list->vector);
+    free(list);
+    exit(0);
 }
 
 vector* createVector(){
@@ -210,4 +221,22 @@ int printVector(vector* list){
     }
     printf("\n");
     return 0;
+}
+
+int clean(vector* list){
+    
+    free(list->vector);
+
+    list->vector = (int*)malloc(INCREMENT*sizeof(int));
+    if(list->vector == NULL){
+        free(list);
+        printf("Error alocating memory\n");
+        return 1;
+    }
+
+    list->size = INCREMENT;
+    list->lastNumIndex = -1;
+
+    return 0;
+
 }

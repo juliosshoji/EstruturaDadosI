@@ -8,8 +8,8 @@
 
 typedef struct {
     int* vector;
-    int size;
-    int lastNumIndex;
+    long int size;
+    long int lastNumIndex;
 } vector;
 
 int push_back(vector* list, int* number);
@@ -69,11 +69,11 @@ int main(int argc, char* argv[]){
                 if(list->lastNumIndex == -1){
                     printf("\nNo index was created\n");
                 } else {
-                    printf("\nBiggest Index: %d\n", list->lastNumIndex);
+                    printf("\nBiggest Index: %ld\n", list->lastNumIndex);
                 }
                 break;
             case 8:
-                printf("\nAlocation Size: %d\n", list->size);
+                printf("\nAlocation Size: %ld\n", list->size);
                 break;
             case 9:
                 error = clean(list);
@@ -195,11 +195,14 @@ int pop(vector* list){
 }
 
 int sort(vector* list){
+
+    clock_t begin = clock();
+
     int swapped = 0;
     int temp;
-    for(int macro = list->lastNumIndex-1; macro > 0; macro--){
+    for(long int macro = list->lastNumIndex-1; macro > 0; macro--){
         swapped = 0;
-        for(int micro = 0; micro <= macro; micro++){
+        for(long int micro = 0; micro <= macro; micro++){
             if(list->vector[micro] > list->vector[micro + 1]){
                 temp = list->vector[micro];
                 list->vector[micro] = list->vector[micro + 1];
@@ -211,6 +214,11 @@ int sort(vector* list){
                 break;
         }
     }
+
+    clock_t end = clock();
+
+    printf("Time spent sorting: %.10lf seconds\n", (double)(end-begin)/CLOCKS_PER_SEC);
+
     return 0;
 }
 

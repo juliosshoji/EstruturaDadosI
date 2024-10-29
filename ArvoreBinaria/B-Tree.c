@@ -16,6 +16,10 @@ int insertNode(node** root, int* info, node* dad);
 int removeNode(node** root, int* info);
 int balanceTree(node** root);
 int generateRandom(node** random, int size);
+int removeNodeCaseOne(node** rNode);
+int removeNodeCaseTwo(node** rNode);
+int removeNodeCaseThree(node** rNode);
+node* goAllLeft(node** rNode);
 
 int main(int argc, char* argv[]){
 
@@ -127,7 +131,7 @@ int insertNode(node** root, int* info, node* dad){
 };
 
 int removeNode(node** root, int* info){
-    node* run = root;
+    node* run = (*root);
     if(run == NULL){
         printf("Root Empty\n");
         return 0;
@@ -139,19 +143,21 @@ int removeNode(node** root, int* info){
         }
         if(run->left == NULL && run->right == NULL){
             removeNodeCaseOne(&run);
-        }
-        if((run->left != NULL && run->right == NULL)||(run->left == NULL && run->right != NULL)){
-            removeNodeCaseTwo(&run);
-        }
-        if(run->left != NULL && run->right != NULL){
-            removeNodeCaseThree(&run);
+        } else {
+            if((run->left != NULL && run->right == NULL)||(run->left == NULL && run->right != NULL)){
+                removeNodeCaseTwo(&run);
+            } else {
+                if(run->left != NULL && run->right != NULL){
+                    removeNodeCaseThree(&run);
+                }
+            }
         }
     }
     if(run->left != NULL && *info < run->info){
-        removeNode(run->left, info);
+        removeNode(&run->left, info);
     }
     if(run->right != NULL && *info > run->info){
-        removeNode(run->right, info);
+        removeNode(&run->right, info);
     }
     return 0;
 };
@@ -204,6 +210,31 @@ int removeNodeCaseTwo(node** rNode){
 
 int removeNodeCaseThree(node** rNode){
     //Localizar nó mais prox
+        //Um pra direita
+        node* run = (*rNode)->right;
+
+            //Todos para esquerda
+            run = goAllLeft(&run);
+
     //Substituir no nó removido
+    (*rNode)->info = run->info;
+    (*rNode)->references = run->references;
     //passo 1 ou 2
+    if(run->left != NULL || run->right != NULL){
+        removeNodeCaseTwo(&run);
+    } else {
+        if(run->left == NULL && run->right == NULL){
+            removeNodeCaseOne(&run);
+        }
+    }
+    
+};
+
+node* goAllLeft(node** rNode){
+
+    if((*rNode)->left == NULL){
+        return (*rNode);
+    }
+
+    return goAllLeft(&(*rNode)->left);
 };

@@ -238,6 +238,7 @@ int removeNodeCaseThree(node** rNode){
     (*rNode)->info = run->info;
     (*rNode)->references = run->references;
     
+    
     if(run->left != NULL || run->right != NULL){
         removeNodeCaseTwo(&run);
     } else {

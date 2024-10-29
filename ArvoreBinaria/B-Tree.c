@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h> 
-
-#define M -10000
-#define N 10000
+#include "../DinamicVector/DinamicVector.h"
 
 typedef struct Tnode {
     struct Tnode *dad, *right, *left;
@@ -20,6 +18,9 @@ int removeNodeCaseOne(node** rNode);
 int removeNodeCaseTwo(node** rNode);
 int removeNodeCaseThree(node** rNode);
 node* goAllLeft(node** rNode);
+vector* searchInOrdem(node** root, vector** list);
+vector* searchPreOrdem(node** root, vector** list);
+vector* searchPostOrdem(node** root, vector** list);
 
 int main(int argc, char* argv[]){
 
@@ -36,7 +37,7 @@ int main(int argc, char* argv[]){
         printf("\n2) Insert Node");
         printf("\n3) Remove Node");
         printf("\n4) Balance Tree");
-        printf("\n5) Print Tree In Order");
+        printf("\n5) Print Tree");
         printf("\n6) Generate Random Numbers");
         printf("\n");
 
@@ -80,18 +81,39 @@ int main(int argc, char* argv[]){
 }
 
 int printTree(node* root){
-    node* run = root;
-    if(run == NULL){
-        printf("Root Empty\n");
-        return 0;
+    vector* list = createVector();
+    int option;
+    int condition = 1;
+    while(condition){
+        printf("\n\n1) Exit");
+        printf("\n2) Print in ordem");
+        printf("\n3) Print in Pre-Ordem");
+        printf("\n4) Print in Post-Ordem");
+        printf("\n");
+
+        scanf("%d", &option);
+
+        switch(option){
+            case 1:
+                return 0;
+            case 2:
+                list = searchInOrdem(&root, &list);
+                condition = 0;
+                break;
+            case 3:
+                list = searchPreOrdem(&root, &list);
+                condition = 0;
+                break;
+            case 4:
+                list = searchPostOrdem(&root, &list);
+                condition = 0;
+                break;
+            default:
+                printf("Input a valid option\n");
+        }
     }
-    if(run->left != NULL){
-        printTree(run->left);
-    }
-    printf("%d\n", run->info);
-    if(run->right != NULL){
-        printTree(run->right);
-    }
+    printVector(list);
+
     return 0;
 };
 
@@ -209,17 +231,13 @@ int removeNodeCaseTwo(node** rNode){
 };
 
 int removeNodeCaseThree(node** rNode){
-    //Localizar nó mais prox
-        //Um pra direita
-        node* run = (*rNode)->right;
-
-            //Todos para esquerda
-            run = goAllLeft(&run);
-
-    //Substituir no nó removido
+    node* run = (*rNode)->right;
+    
+    run = goAllLeft(&run);
+    
     (*rNode)->info = run->info;
     (*rNode)->references = run->references;
-    //passo 1 ou 2
+    
     if(run->left != NULL || run->right != NULL){
         removeNodeCaseTwo(&run);
     } else {
@@ -227,7 +245,6 @@ int removeNodeCaseThree(node** rNode){
             removeNodeCaseOne(&run);
         }
     }
-    
 };
 
 node* goAllLeft(node** rNode){
@@ -238,3 +255,51 @@ node* goAllLeft(node** rNode){
 
     return goAllLeft(&(*rNode)->left);
 };
+
+vector* searchInOrdem(node** root, vector** list){
+    node* run = (*root);
+    if(run == NULL){
+        printf("Root Empty\n");
+        return NULL;
+    }
+    if(run->left != NULL){
+        searchInOrdem(&run->left, list);
+    }
+    push_back((*list), &run->info);
+    if(run->right != NULL){
+        searchInOrdem(&run->right, list);
+    }
+    return *list;
+};
+
+vector* searchPreOrdem(node** root, vector** list){
+    node* run = (*root);
+    if(run == NULL){
+        printf("Root Empty\n");
+        return NULL;
+    }
+    push_back((*list), &run->info);
+    if(run->left != NULL){
+        searchPreOrdem(&run->left, list);
+    }
+    if(run->right != NULL){
+        searchPreOrdem(&run->right, list);
+    }
+    return *list;
+};
+
+vector* searchPostOrdem(node** root, vector** list){
+    node* run = (*root);
+    if(run == NULL){
+        printf("Root Empty\n");
+        return NULL;
+    }
+    if(run->left != NULL){
+        searchPostOrdem(&run->left, list);
+    }
+    if(run->right != NULL){
+        searchPostOrdem(&run->right, list);
+    }
+    push_back((*list), &run->info);
+    return *list;
+}

@@ -17,7 +17,6 @@ int pop(vector* list);
 int generateRandom(vector* list);
 int sort(vector* list);
 vector* createVector();
-int exitSafe(vector* list);
 int printVector(vector* list);
 int clean(vector* list);
 

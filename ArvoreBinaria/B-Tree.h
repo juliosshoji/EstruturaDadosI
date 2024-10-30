@@ -8,7 +8,9 @@ typedef struct Tnode {
     int references;
 } node;
 
-int printTree(node* root);
+int printTreeInOrdem(node* root);
+int printTreePreOrdem(node* root);
+int printTreePostOrdem(node* root);
 int inicializeTree(node** root);
 int insertNode(node** root, int* info, node* dad);
 int removeNode(node** root, int* info);
@@ -18,103 +20,26 @@ int removeNodeCaseOne(node** rNode);
 int removeNodeCaseTwo(node** rNode);
 int removeNodeCaseThree(node** rNode);
 node* goAllLeft(node** rNode);
-vector* searchInOrdem(node** root, vector** list);
-vector* searchPreOrdem(node** root, vector** list);
-vector* searchPostOrdem(node** root, vector** list);
+vetor* searchInOrdem(node** root, vetor** list);
+vetor* searchPreOrdem(node** root, vetor** list);
+vetor* searchPostOrdem(node** root, vetor** list);
 
-int main(int argc, char* argv[]){
-
-    node* root;
-    inicializeTree(&root);
-
-    int option;
-    int condition = 1;
-    int info;
-
-    while(condition){
-        printf("B-Tree\n");
-        printf("\n1) Exit");
-        printf("\n2) Insert Node");
-        printf("\n3) Remove Node");
-        printf("\n4) Balance Tree");
-        printf("\n5) Print Tree");
-        printf("\n6) Generate Random Numbers");
-        printf("\n");
-
-        scanf("%d", &option);
-
-        switch (option)
-        {
-        case 1:
-            exit(0);
-            break;
-        case 2:
-            printf("\nWhat info to store?\n");
-            scanf("%d", &info);
-            insertNode(&root, &info, NULL);
-            break;
-        case 3:
-            printf("\nWhat info to remove?\n");
-            scanf("%d", &info);
-            removeNode(&root, &info);
-            break;
-        case 4:
-            balanceTree(&root);
-            printf("\nBalanced!\n");
-            break;
-        case 5:
-            printTree(root);
-            break;
-        case 6:
-            printf("How many info to generate?\n");
-            scanf("%d", &info);
-            generateRandom(&root, info);
-            break;
-        default:
-            printf("\nPlease input a valid option!\n");
-            break;
-        }
-
-    }
-
+int printTreeInOrdem(node* root){
+    vetor* list = createvetor();
+    list = searchInOrdem(&root, &list);
+    printvetor(list);
     return 0;
-}
+};
 
-int printTree(node* root){
-    vector* list = createVector();
-    int option;
-    int condition = 1;
-    while(condition){
-        printf("\n\n1) Exit");
-        printf("\n2) Print in ordem");
-        printf("\n3) Print in Pre-Ordem");
-        printf("\n4) Print in Post-Ordem");
-        printf("\n");
-
-        scanf("%d", &option);
-
-        switch(option){
-            case 1:
-                return 0;
-            case 2:
-                list = searchInOrdem(&root, &list);
-                condition = 0;
-                break;
-            case 3:
-                list = searchPreOrdem(&root, &list);
-                condition = 0;
-                break;
-            case 4:
-                list = searchPostOrdem(&root, &list);
-                condition = 0;
-                break;
-            default:
-                printf("Input a valid option\n");
-        }
-    }
-    printVector(list);
-
+int printTreePreOrdem(node* root){
+    vetor* list = createvetor();
+    list = searchPreOrdem(&root, &list);
+    printvetor(list);
     return 0;
+};
+
+int printTreePostOrdem(node* root){
+
 };
 
 int inicializeTree(node** root){
@@ -257,7 +182,7 @@ node* goAllLeft(node** rNode){
     return goAllLeft(&(*rNode)->left);
 };
 
-vector* searchInOrdem(node** root, vector** list){
+vetor* searchInOrdem(node** root, vetor** list){
     node* run = (*root);
     if(run == NULL){
         printf("Root Empty\n");
@@ -273,7 +198,7 @@ vector* searchInOrdem(node** root, vector** list){
     return *list;
 };
 
-vector* searchPreOrdem(node** root, vector** list){
+vetor* searchPreOrdem(node** root, vetor** list){
     node* run = (*root);
     if(run == NULL){
         printf("Root Empty\n");
@@ -289,7 +214,7 @@ vector* searchPreOrdem(node** root, vector** list){
     return *list;
 };
 
-vector* searchPostOrdem(node** root, vector** list){
+vetor* searchPostOrdem(node** root, vetor** list){
     node* run = (*root);
     if(run == NULL){
         printf("Root Empty\n");

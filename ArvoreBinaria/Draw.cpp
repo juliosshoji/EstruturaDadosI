@@ -30,7 +30,7 @@ void Draw::drawMenu(){
     this->drawLine();
     cout << setw((this->biggestQSize*1.5)/2) << this->title << endl;
     this->drawLine();
-    cout << this->pattern << " " << index << ") " << setw(4) << "Sair" << setw(((this->biggestQSize*1.5)-8)) << this->pattern << endl;
+    cout << this->pattern << " " << index << ") " << setw(4) << "Exit" << setw(((this->biggestQSize*1.5)-8)) << this->pattern << endl;
     for(string option : options){
         index++;
         cout << this->pattern << " " << index << ") " << setw(option.length()) << option << setw(((this->biggestQSize*1.5)-option.length()-4))  << this->pattern << endl;

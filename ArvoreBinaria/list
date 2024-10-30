@@ -1,11 +1,3 @@
-#include "DinamicVector.h"
-
-typedef struct Tnode {
-    struct Tnode *dad, *right, *left;
-    int info;
-    int references;
-} node;
-
 int printTreeInOrdem(node* root);
 int printTreePreOrdem(node* root);
 int printTreePostOrdem(node* root);

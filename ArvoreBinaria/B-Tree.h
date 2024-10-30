@@ -6,9 +6,9 @@ typedef struct Tnode {
     int references;
 } node;
 
-int printTreeInOrdem(node* root);
-int printTreePreOrdem(node* root);
-int printTreePostOrdem(node* root);
+int printTreeInOrdem(node** root);
+int printTreePreOrdem(node** root);
+int printTreePostOrdem(node** root);
 int inicializeTree(node** root);
 int insertNode(node** root, int* info, node* dad);
 int removeNode(node** root, int* info);

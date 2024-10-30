@@ -80,7 +80,7 @@ void Controller::RemoveNode(){
     cout << endl << "What info to remove?\n" << endl;
     int info;
     cin >> info;
-    
+
     string name;
     cout << endl << "Where to remove?" << endl;
     cin >> name;
@@ -151,7 +151,7 @@ void Controller::PrintInOrdem(string name){
         cout << "Try again!" << endl;
         return;
     }
-    printTreeInOrdem(*(Tree));
+    printTreeInOrdem(Tree);
 };
 
 void Controller::PrintPreOrdem(string name){
@@ -161,7 +161,7 @@ void Controller::PrintPreOrdem(string name){
         cout << "Try again!" << endl;
         return;
     }
-    printTreePreOrdem(*(Tree));
+    printTreePreOrdem(Tree);
 };
 
 void Controller::PrintPostOrdem(string name){
@@ -171,5 +171,5 @@ void Controller::PrintPostOrdem(string name){
         cout << "Try again!" << endl;
         return;
     }
-    printTreePostOrdem(*(Tree));
+    printTreePostOrdem(Tree);
 };

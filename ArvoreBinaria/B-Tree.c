@@ -1,6 +1,6 @@
 #include "B-Tree.h"
 
-int printTreeInOrdem(node* root){
+int printTreeInOrdem(node** root){
     vetor* list = createvetor();
     if(list == NULL){
         exit(EXIT_FAILURE);
@@ -9,12 +9,14 @@ int printTreeInOrdem(node* root){
         free(list);
         exit(EXIT_FAILURE);
     }
-    list = searchInOrdem(&root, &list);
-    printvetor(list);
+    list = searchInOrdem(root, &list);
+    if(list != NULL){
+        printvetor(list);
+    }
     return 0;
 };
 
-int printTreePreOrdem(node* root){
+int printTreePreOrdem(node** root){
     vetor* list = createvetor();
     if(list == NULL){
         exit(EXIT_FAILURE);
@@ -23,12 +25,14 @@ int printTreePreOrdem(node* root){
         free(list);
         exit(EXIT_FAILURE);
     }
-    list = searchPreOrdem(&root, &list);
-    printvetor(list);
+    list = searchPreOrdem(root, &list);
+    if(list != NULL){
+        printvetor(list);
+    }    
     return 0;
 };
 
-int printTreePostOrdem(node* root){
+int printTreePostOrdem(node** root){
     vetor* list = createvetor();
     if(list == NULL){
         exit(EXIT_FAILURE);
@@ -37,8 +41,10 @@ int printTreePostOrdem(node* root){
         free(list);
         exit(EXIT_FAILURE);
     }
-    list = searchPostOrdem(&root, &list);
-    printvetor(list);
+    list = searchPostOrdem(root, &list);
+    if(list != NULL){
+        printvetor(list);
+    }
     return 0;
 };
 
@@ -127,6 +133,10 @@ int generateRandom(node** root, int size){
 };
 
 int removeNodeCaseOne(node** rNode){
+    if((*rNode)->dad == NULL){
+        free((*rNode));
+        return 0;
+    }
     if((*rNode)->dad->right == (*rNode)){
         (*rNode)->dad->right = NULL;
         free((*rNode));

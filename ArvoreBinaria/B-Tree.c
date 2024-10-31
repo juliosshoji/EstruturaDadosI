@@ -85,35 +85,35 @@ int insertNode(node** root, int* info, node* dad){
 };
 
 int removeNode(node** root, int* info){
-    node* run = (*root);
-    if(run == NULL){
+    if((*root) == NULL){
         printf("Root Empty\n");
         return 0;
     }
-    if(run->info == *info){
-        if(run->references > 1){
-            run->references--;
+    if((*root)->info == *info){
+        printf("\nNode found!\n");
+        if((*root)->references > 1){
+            (*root)->references--;
             return 0;
         }
-        if(run->left == NULL && run->right == NULL){
-            removeNodeCaseOne(&run);
+        if((*root)->left == NULL && (*root)->right == NULL){
+            removeNodeCaseOne(root);
         } else {
-            if((run->left != NULL && run->right == NULL)||(run->left == NULL && run->right != NULL)){
-                removeNodeCaseTwo(&run);
+            if(((*root)->left != NULL && (*root)->right == NULL)||((*root)->left == NULL && (*root)->right != NULL)){
+                removeNodeCaseTwo(root);
             } else {
-                if(run->left != NULL && run->right != NULL){
-                    removeNodeCaseThree(&run);
+                if((*root)->left != NULL && (*root)->right != NULL){
+                    removeNodeCaseThree(root);
                 }
             }
         }
         return 0;
     }
-    if(run->left != NULL && *info < run->info){
-        removeNode(&run->left, info);
+    if((*root)->left != NULL && *info < (*root)->info){
+        removeNode(&(*root)->left, info);
         return 0;
     }
-    if(run->right != NULL && *info > run->info){
-        removeNode(&run->right, info);
+    if((*root)->right != NULL && *info > (*root)->info){
+        removeNode(&(*root)->right, info);
     }
     return 0;
 };
@@ -134,7 +134,8 @@ int generateRandom(node** root, int size){
 
 int removeNodeCaseOne(node** rNode){
     if((*rNode)->dad == NULL){
-        free((*rNode));
+        free(*rNode);
+        *rNode = NULL;
         return 0;
     }
     if((*rNode)->dad->right == (*rNode)){
@@ -202,7 +203,7 @@ node* goAllLeft(node** rNode){
 
 vetor* searchInOrdem(node** root, vetor** list){
     node* run = (*root);
-    if(run == NULL){
+    if(*root == NULL){
         printf("Root Empty\n");
         return NULL;
     }
@@ -218,7 +219,7 @@ vetor* searchInOrdem(node** root, vetor** list){
 
 vetor* searchPreOrdem(node** root, vetor** list){
     node* run = (*root);
-    if(run == NULL){
+    if(*root == NULL){
         printf("Root Empty\n");
         return NULL;
     }

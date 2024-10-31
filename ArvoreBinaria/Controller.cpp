@@ -77,7 +77,7 @@ void Controller::InsertNode(){
 };
 
 void Controller::RemoveNode(){
-    cout << endl << "What info to remove?\n" << endl;
+    cout << endl << "What info to remove?" << endl;
     int info;
     cin >> info;
 

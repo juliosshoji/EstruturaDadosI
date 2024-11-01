@@ -180,14 +180,14 @@ int pop(vector* list){
     }
     list->lastNumIndex--;
 
-    if(list->lastNumIndex < (list->size/2)){
-        list->vector = (int*)reallocarray(list->vector, list->size/2, sizeof(int));
+    if(list->lastNumIndex < (list->size)-(INCREMENT)){
+        list->vector = (int*)reallocarray(list->vector, (list->size)-(INCREMENT), sizeof(int));
         if(list->vector == NULL){
             printf("Error realocating memory\n");
             return 2;
         }
 
-        list->size /= 2;
+        list->size -= INCREMENT;
     }
     
     return 0;

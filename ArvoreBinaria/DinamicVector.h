@@ -3,8 +3,6 @@
 #include <time.h>
 
 #define INCREMENT 8
-#define M -100000
-#define N 100000
 
 typedef struct {
     int* vetor;

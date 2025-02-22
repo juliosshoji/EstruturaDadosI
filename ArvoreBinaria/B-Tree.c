@@ -126,7 +126,7 @@ int balanceTree(node** root){
 int generateRandom(node** root, int size){
     int info;
     for(int index = 0; index < size; index++){
-        info = M + rand() / (RAND_MAX / (N - M + 1) + 1);
+        info = rand();
         insertNode(root, &info , NULL);
     }
     return 0;

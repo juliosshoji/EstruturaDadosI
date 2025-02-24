@@ -63,21 +63,16 @@ int push_back(vetor* list, int* number){
     return 0;
 }
 
-int pop(vetor* list){
+int pop(vetor* list, int index){
     if(list->lastNumIndex == -1){
         printf("Empty list\n");
-        return 0;
+        return 1s;
     }
-    printf("Where to remove? (index)\n");
-    int index;
-    while(1){
-        scanf("%d", &index);
-        if(index > list->lastNumIndex){
-            printf("No number in list with index %d, try again: \n", index);
-        } else {
-            break;
-        }
+    if(index > list->lastNumIndex){
+        printf("Index out of range");
+        return 1;
     }
+
     int next;
 
     for(int indexlist = index; indexlist <= list->lastNumIndex; indexlist++, index++){

@@ -2,6 +2,8 @@
 
     #define DATASTRUCT_HPP_
 
+    #define INITIAL_SIZE 16
+
     #include <cstdlib>
     #include <iostream>
     #include <typeinfo>
@@ -49,11 +51,11 @@
 
         public:
             Datastruct() : array(nullptr) {
-                this->array = (T*)malloc(sizeof(T)*ALLOCATION_PORTION);
+                this->array = (T*)malloc(sizeof(T)*INITIAL_SIZE);
                 if(!this->array){
                     exit(2);
                 }
-                this->capacity = ALLOCATION_PORTION;
+                this->capacity = INITIAL_SIZE;
                 this->lenght = 0;
             };
 

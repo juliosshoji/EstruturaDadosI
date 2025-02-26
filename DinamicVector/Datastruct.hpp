@@ -31,17 +31,19 @@
                 if(high <= low)
                     return;
                 T temp;
-                int index_j, index_i = low-1;
+                int pivot = (high+low-1)/2;
+                int index_j;
+                int index_i = low-1;
                 for(index_j = low; index_j < high; index_j++){
-                    if(this->array[high] > this->array[index_j]){
+                    if(this->array[pivot] > this->array[index_j]){
                         index_i++;
                         temp = this->array[index_i];
                         this->array[index_i] = this->array[index_j];
                         this->array[index_j] = temp;
                     }
                 }
-                temp = this->array[high];
-                this->array[high] = this->array[index_i+1];
+                temp = this->array[pivot];
+                this->array[pivot] = this->array[index_i+1];
                 this->array[index_i+1] = temp;
                 quick_sort(low , index_i); //LEFT
                 quick_sort(index_i+2, high); //RIGHT

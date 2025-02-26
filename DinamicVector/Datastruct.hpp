@@ -2,9 +2,7 @@
 
     #define DATASTRUCT_HPP_
 
-    #define ALLOCATION_PORTION 16
-
-    #include <stdlib.h>
+    #include <cstdlib>
     #include <iostream>
     #include <typeinfo>
     #include <thread>
@@ -20,11 +18,11 @@
             int lenght;
 
             void allocate(){
-                this->array = (T*)reallocarray(this->array, this->capacity*ALLOCATION_PORTION, sizeof(T));
+                this->array = (T*)reallocarray(this->array, this->capacity+(this->capacity/2), sizeof(T));
                 if(this->array == NULL){
                     exit(3);
                 }
-                this->capacity = (sizeof(T)*this->capacity)+ALLOCATION_PORTION;
+                this->capacity = this->capacity+(this->capacity/2);
             };
 
             void quick_sort(int low, int high){

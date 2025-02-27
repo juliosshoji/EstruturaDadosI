@@ -27,26 +27,31 @@
                 this->capacity = this->capacity+(this->capacity/2);
             };
 
-            void quick_sort(int low, int high){
-                if(high <= low)
-                    return;
-                T temp;
-                int pivot = (high+low-1)/2;
-                int index_j;
+            static void quick_sort_recursion(const int low, const int high, T* array){
+                
+                if(high <= low) return;
+
+                int pivot = (high+low)/2;
+                
+                int index_j = low;
                 int index_i = low-1;
-                for(index_j = low; index_j < high; index_j++){
-                    if(this->array[pivot] > this->array[index_j]){
+                int temp = 0;
+
+                while(index_j < high){
+                    if(array[index_j] <= array[pivot]){
                         index_i++;
-                        temp = this->array[index_i];
-                        this->array[index_i] = this->array[index_j];
-                        this->array[index_j] = temp;
+                        temp = array[index_j];
+                        array[index_j] = array[index_i];
+                        array[index_i] = temp;
                     }
+                    index_j++;
                 }
-                temp = this->array[pivot];
-                this->array[pivot] = this->array[index_i+1];
-                this->array[index_i+1] = temp;
-                quick_sort(low , index_i); //LEFT
-                quick_sort(index_i+2, high); //RIGHT
+                temp = array[index_i+1];
+                array[index_i+1] = array[pivot];
+                array[pivot] = temp;
+
+                quick_sort_recursion(low , index_i, array); //LEFT
+                quick_sort_recursion(index_i+2, high, array); //RIGHT
             };
 
         public:
@@ -81,7 +86,7 @@
             }; 
 
             void sort(){
-                quick_sort(0, this->lenght-1);
+                quick_sort_recursion(0, this->lenght-1, this->array);
             };
 
             void print_vector(){

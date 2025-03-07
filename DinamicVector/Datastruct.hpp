@@ -29,20 +29,21 @@
 
             static void quick_sort_recursion(const int low, const int high, T* array){
                 
-                if(high <= low) return;
+                if(low >= high) return;
 
-                const int pivot = (high+low)/2;
+                const int pivot = high;
                 
                 int index_j = low;
                 int index_i = low-1;
                 int temp = 0;
 
                 while(index_j < high){
-                    if(array[pivot] > array[index_j]){
+                    if(array[pivot] >= array[index_j]){
                         index_i++;
                         temp = array[index_j];
                         array[index_j] = array[index_i];
                         array[index_i] = temp;
+                        
                     }
                     index_j++;
                 }
@@ -51,7 +52,7 @@
                 array[pivot] = temp;
 
                 
-                quick_sort_recursion(low , index_i, array); //LEFT
+                quick_sort_recursion(low, index_i, array); //LEFT
                 quick_sort_recursion(index_i+2, high, array); //RIGHT
             };
 
@@ -76,14 +77,13 @@
             };
 
             void append(T value){
-                if(lenght == capacity)
-                    this->allocate();
+                if(lenght == capacity) this->allocate();
+
                 if(typeid(T) == typeid(*(this->array))){
                     this->lenght++;
                     this->array[this->lenght-1] = value;
                 } 
-                else
-                    exit(1);
+                else exit(1);
             }; 
 
             void sort(){

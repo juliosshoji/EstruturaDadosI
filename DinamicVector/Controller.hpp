@@ -26,6 +26,7 @@
             void pop();
             void print();
             void generate_random();
+            static void generate(int num, Datastruct<int>* vetor);
             void sort();
     };
 

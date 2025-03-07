@@ -17,7 +17,11 @@ void Controller::start(){
 
 bool Controller::doAction(string title, vector<string> options, vector<void (Controller:: *)()> actions){
     unique_ptr<Draw> Menu(new Draw(options, title, "*"));
-    int choice = Menu->getOption();
+    int choice = -1;
+    while(choice == -1){
+        choice = Menu->getOption();
+    }
+    
     if(choice != 0)
         (this->*actions.at(choice-1))();
     else{
@@ -31,8 +35,13 @@ void Controller::generate_random(){
     cout << "How many random numbers to generate?" << endl;
     int num;
     cin >> num;
+
+    this->generate(num, this->vetor);
+};
+
+void Controller::generate(int num, Datastruct<int>* vetor){
     for(int i = 0; i < num; i++)
-        this->vetor->append(MIN + (rand() % (MAX - MIN + 1)));
+        vetor->append(MIN + (rand() % (MAX - MIN + 1)));
 };
 
 void Controller::append(){

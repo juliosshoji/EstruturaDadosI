@@ -31,14 +31,14 @@
                 
                 if(high <= low) return;
 
-                int pivot = (high+low)/2;
+                const int pivot = (high+low)/2;
                 
                 int index_j = low;
                 int index_i = low-1;
                 int temp = 0;
 
                 while(index_j < high){
-                    if(array[index_j] <= array[pivot]){
+                    if(array[pivot] > array[index_j]){
                         index_i++;
                         temp = array[index_j];
                         array[index_j] = array[index_i];
@@ -50,6 +50,7 @@
                 array[index_i+1] = array[pivot];
                 array[pivot] = temp;
 
+                
                 quick_sort_recursion(low , index_i, array); //LEFT
                 quick_sort_recursion(index_i+2, high, array); //RIGHT
             };

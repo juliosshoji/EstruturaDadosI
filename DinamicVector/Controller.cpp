@@ -10,10 +10,16 @@ Controller::~Controller(){
 };
 
 void Controller::start(){
-    vector<string> options {"Generate Random (INTEGER) Values", "Sort", "Append", "Pop", "Print"};
-    vector<void (Controller::*)()> actions { &Controller::generate_random, &Controller::sort, &Controller::append, &Controller::pop, &Controller::print};
-    while(this->doAction("Pilha", options, actions));
+    vector<string> options {"Generate Random (INTEGER) Values", "Sort", "Append", "Pop", "Print", "Clear Vetor"};
+    vector<void (Controller::*)()> actions { &Controller::generate_random, &Controller::sortMenu, &Controller::append, &Controller::pop, &Controller::print, &Controller::clearVetor};
+    while(this->doAction("Sorting Dinamic Vetor", options, actions));
 };
+
+void Controller::sortMenu() {
+     vector<string> options {"Quick Sort", "Bubble Sort"};
+    vector<void (Controller::*)()> actions { &Controller::sortByQuickSort, &Controller::sortByBubbleSort};
+    while(this->doAction("Sorting Algorithms", options, actions));
+}
 
 bool Controller::doAction(string title, vector<string> options, vector<void (Controller:: *)()> actions){
     unique_ptr<Draw> Menu(new Draw(options, title, "*"));
@@ -61,11 +67,24 @@ void Controller::print(){
     cout << endl;
 };
 
-void Controller::sort(){
+void Controller::sortByQuickSort(){
     clock_t begin = clock();
-    this->vetor->sort();
+    this->vetor->quick_sort();
     clock_t end = clock();
 
     printf("Time spent sorting: %.10lf seconds\n", (double)(end-begin)/CLOCKS_PER_SEC);
     cout << endl << "Sorted!" << endl;
+}
+
+void Controller::sortByBubbleSort(){
+    clock_t begin = clock();
+    this->vetor->bubble_sort();
+    clock_t end = clock();
+
+    printf("Time spent sorting: %.10lf seconds\n", (double)(end-begin)/CLOCKS_PER_SEC);
+    cout << endl << "Sorted!" << endl;
+}
+
+void Controller::clearVetor(){
+    this->vetor->clear();
 }

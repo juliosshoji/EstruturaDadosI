@@ -2,8 +2,8 @@
 
     #define CONTROLLER_HPP_
 
-    #define MAX 99999
-    #define MIN -99999
+    #define MAX 2147483647
+    #define MIN -2147483648
 
     #include <memory>
     #include "Draw.hpp"
@@ -26,8 +26,11 @@
             void pop();
             void print();
             void generate_random();
+            void sortMenu();
             static void generate(int num, Datastruct<int>* vetor);
-            void sort();
+            void sortByQuickSort();
+            void sortByBubbleSort();
+            void clearVetor();
     };
 
 #endif

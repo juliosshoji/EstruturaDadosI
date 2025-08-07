@@ -86,7 +86,7 @@
                 else exit(1);
             }; 
 
-            void sort(){
+            void quick_sort(){
                 quick_sort_recursion(0, this->lenght-1, this->array);
             };
 
@@ -96,6 +96,29 @@
                     cout << this->array[i] << " ";
                 }
                 cout << "]" << endl;
+            };
+
+            void bubble_sort(){
+                T temp;
+                for (int i = this->lenght; i > 0; i--){
+                    for (int j = 0; j < i; j++) {
+                        if (this->array[j] > this->array[j+1]) {
+                            temp = this->array[j];
+                            this->array[j] = this->array[j+1];
+                            this->array[j+1] = temp;
+                        }
+                    }
+                }
+            };
+
+            void clear(){
+                free(this->array);
+                this->array = (T*)malloc(sizeof(T)*INITIAL_SIZE);
+                if(!this->array){
+                    exit(2);
+                }
+                this->capacity = INITIAL_SIZE;
+                this->lenght = 0;
             };
     };
 

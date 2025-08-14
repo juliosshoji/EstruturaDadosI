@@ -16,8 +16,8 @@ void Controller::start(){
 };
 
 void Controller::sortMenu() {
-     vector<string> options {"Quick Sort", "Bubble Sort"};
-    vector<void (Controller::*)()> actions { &Controller::sortByQuickSort, &Controller::sortByBubbleSort};
+    vector<string> options {"Quick Sort", "Bubble Sort", "Merge Sort"};
+    vector<void (Controller::*)()> actions { &Controller::sortByQuickSort, &Controller::sortByBubbleSort, &Controller::sortByMergeSort};
     while(this->doAction("Sorting Algorithms", options, actions));
 }
 
@@ -70,6 +70,15 @@ void Controller::print(){
 void Controller::sortByQuickSort(){
     clock_t begin = clock();
     this->vetor->quick_sort();
+    clock_t end = clock();
+
+    printf("Time spent sorting: %.10lf seconds\n", (double)(end-begin)/CLOCKS_PER_SEC);
+    cout << endl << "Sorted!" << endl;
+}
+
+void Controller::sortByMergeSort(){
+    clock_t begin = clock();
+    this->vetor->merge_sort();
     clock_t end = clock();
 
     printf("Time spent sorting: %.10lf seconds\n", (double)(end-begin)/CLOCKS_PER_SEC);

@@ -30,6 +30,7 @@
             static void generate(int num, Datastruct<int>* vetor);
             void sortByQuickSort();
             void sortByBubbleSort();
+            void sortByMergeSort();
             void clearVetor();
     };
 

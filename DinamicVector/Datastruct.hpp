@@ -56,6 +56,49 @@
                 quick_sort_recursion(index_i+2, high, array); //RIGHT
             };
 
+            void merge(const int low, const int high, const int mid, T* array){
+                T* sub_array1[this->lenght/2];
+                T* sub_array2[this->lenght/2];
+
+                for(int index = 0; index < this->lenght/2; index++){
+                    *sub_array1[index] = array[low + index];
+                    *sub_array2[index] = array[mid+index-1];
+                }
+
+                int i = 0, j = 0;
+
+                int k = low;
+                int half = this->lenght/2;
+                while(i < half && j < half) {
+                    if (sub_array1[i] <= sub_array2[j]) {
+                        array[k++] = *sub_array1[i++];
+                    } else {
+                        array[k++] = *sub_array2[j++];
+                    }
+                }
+
+                while(i < half) {
+                    this->array[k++] = *sub_array1[i++];
+                }
+
+                while(j < half) {
+                    this->array[k++] = *sub_array2[j++];
+                }
+            }
+
+            void merge_sort(const int low, const int high, T* array){
+                if(low >= high) {
+                    return;
+                }
+
+                int mid = (low + (high-low))/2.0;
+                merge_sort(low, mid, array);
+                merge_sort(mid, high, array);
+
+                this->merge(low, high, mid, array);
+
+            };
+
         public:
             Datastruct() : array(nullptr) {
                 this->array = (T*)malloc(sizeof(T)*INITIAL_SIZE);
@@ -110,6 +153,10 @@
                     }
                 }
             };
+
+            void merge_sort(){
+                this->merge_sort(0, this->lenght-1, this->array);
+            }
 
             void clear(){
                 free(this->array);

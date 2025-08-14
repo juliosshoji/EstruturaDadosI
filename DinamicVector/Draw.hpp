@@ -11,6 +11,8 @@ using namespace std;
 
 class Draw {
     private:
+
+        const float PADDING = 1.75;
         vector<string> options;
         string title;
         string pattern;
